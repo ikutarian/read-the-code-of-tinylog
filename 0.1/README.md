@@ -307,3 +307,10 @@ public class FileLoggingWriter implements ILoggingWriter {
 1. `Lock` 不是 Java 语言内置的，`synchronized` 是Java 语言的关键字，因此是内置特性。`Lock` 是一个类，通过这个类可以实现同步访问；
 
 2. `Lock` 和 `synchronized` 有一点非常大的不同，采用 `synchronized` 不需要用户去手动释放锁，当 `synchronized` 方法或者 `synchronized` 代码块执行完之后，系统会自动让线程释放对锁的占用；而 `Lock` 则必须要用户去手动释放锁，如果没有主动释放锁，就有可能导致出现死锁现象。
+
+## 缺点
+
+- 不能使用配置文件，只能使用 Java 代码配置 Logger
+- 只能指定一个 log writter，要么是控制台，要么是文件
+- 因为频繁的加锁、解锁，导致读写文件的性能太低
+- 不能自动地创建日志文件，必须保证日志文件的路径存在才能写日志，否则会抛出 `java.io.FileNotFoundException` 异常
